@@ -1,0 +1,20 @@
+name: Check for subscriptions due the next day and notify me flow.
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+jobs:
+  check_and_notify:
+    name: Check for upcoming subscriptions and remind me by phone
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.1
+      - name: Install dependencies
+        run: yarn install
+      - name: Run index.js
+        run: node index.js
